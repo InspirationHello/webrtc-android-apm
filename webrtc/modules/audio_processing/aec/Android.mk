@@ -25,6 +25,9 @@ ifeq ($(TARGET_ARCH),$(filter $(TARGET_ARCH),x86 x86_64))
 LOCAL_SRC_FILES += \
     aec_core_sse2.c \
     aec_rdft_sse2.c
+else ifeq ($(TARGET_ARCH), arm)
+LOCAL_SRC_FILES += \
+	# aec_core_neon.c
 endif
 
 # Flags passed to both C and C++ files.

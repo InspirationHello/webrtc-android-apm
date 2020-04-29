@@ -9,6 +9,7 @@
 # These defines will apply to all source files
 # Think again before changing it
 COUSTOM_NDK_PATH := $(NDK_HOME)
+NDK_TOOLCHAIN_VERSION = 4.8
 MY_WEBRTC_COMMON_DEFS := \
     '-DWEBRTC_POSIX' \
     '-DWEBRTC_LINUX' \
@@ -22,7 +23,9 @@ MY_WEBRTC_COMMON_DEFS := \
 #    '-DNETEQ_VOICEENGINE_CODECS' [module audio_coding neteq]
 #    '-DWEBRTC_MODULE_UTILITY_VIDEO' [module media_file] [module utility]
 MY_WEBRTC_COMMON_DEFS_arm := \
-    '-DWEBRTC_ARCH_ARM'
+    '-DWEBRTC_ARCH_ARM' \
+	'-D__STDC_CONSTANT_MACROS' \
+	'-D__STDC_LIMIT_MACROS' 
 #    '-DWEBRTC_DETECT_ARM_NEON' # only used in a build configuration without Neon
 # TODO(kma): figure out if the above define could be moved to NDK build only.
 
@@ -46,3 +49,22 @@ MY_WEBRTC_COMMON_DEFS_arm := \
 #MY_WEBRTC_COMMON_DEFS_arm += \
 #    '-DWEBRTC_ARCH_ARM_V7A'
 #endif
+LOCAL_C_INCLUDES := \
+	$(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/include \
+	$(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips/include/
+ 
+ifdef WEBRTC_STL
+	LOCAL_NDK_STL_VARIANT := $(WEBRTC_STL)
+	LOCAL_SDK_VERSION := 14
+	LOCAL_MODULE := $(LOCAL_MODULE)_$(WEBRTC_STL)
+endif
+
+APP_ALLOW_MISSING_DEPS = true
+APP_CFLAGS = -D__STDC_FORMAT_MACROS 
+APP_STL = gnustl_static
+APP_PLATFORM = android-9 
+APP_ABI = armeabi-v7a 
+NDK_TOOLCHAIN_VERSION = 4.8 
+APP_CFLAGS = -D__STDC_FORMAT_MACROS 
+NDK_PROJECT_PATH = $(LOCAL_PATH)
+APP_BUILD_SCRIPT = $(LOCAL_PATH)/Android.mk

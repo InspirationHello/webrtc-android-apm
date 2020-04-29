@@ -25,9 +25,12 @@ LOCAL_SRC_FILES := \
     logging.cc \
     platform_file.cc \
     platform_thread.cc \
+    thread_checker_impl.cc \
     stringencode.cc \
     systeminfo.cc \
     timeutils.cc \
+
+# LOCAL_LDLIBS += -llog -ldl -lstdc++
 
 # Flags passed to both C and C++ files.
 LOCAL_CFLAGS := \
@@ -46,8 +49,8 @@ LOCAL_CFLAGS_mips64 := $(MY_WEBRTC_COMMON_DEFS_mips64)
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
     $(LOCAL_PATH)/../.. \
-    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.9/include \
-    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.9/libs/mips/include/ \
+    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/include \
+    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips/include/ \
 
 ifdef WEBRTC_STL
 LOCAL_NDK_STL_VARIANT := $(WEBRTC_STL)

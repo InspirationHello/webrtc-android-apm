@@ -10,24 +10,24 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-include $(LOCAL_PATH)/../../../../android-webrtc.mk
+include $(LOCAL_PATH)/../android-webrtc.mk
 
 LOCAL_ARM_MODE := arm
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
-LOCAL_MODULE := libwebrtc_transient
+LOCAL_MODULE := libwebrtc_wrapper_static
 LOCAL_MODULE_TAGS := optional
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_SRC_FILES := \
-    moving_moments.cc \
-    transient_detector.cc \
-    transient_suppressor.cc \
-    wpd_node.cc \
-    wpd_tree.cc \
+	audio_splitting_filter_buffer.cc
+
+# LOCAL_LDLIBS += -llog -ldl -lstdc++
+#LOCAL_LDLIBS += -lwebrtc_audio_preprocessing # -lwebrtc_common -lwebrtc_apm
+LOCAL_SHARED_LIBRARIES += webrtc_audio_preprocessing
 
 # Flags passed to both C and C++ files.
 LOCAL_CFLAGS := \
     $(MY_WEBRTC_COMMON_DEFS)
-    
+
 LOCAL_CXXFLAGS += $(MY_WEBRTC_COMMON_DEFS) -std=c++11
 
 LOCAL_CFLAGS_arm := $(MY_WEBRTC_COMMON_DEFS_arm)
@@ -40,7 +40,7 @@ LOCAL_CFLAGS_mips64 := $(MY_WEBRTC_COMMON_DEFS_mips64)
 # Include paths placed before CFLAGS/CPPFLAGS
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH) \
-    $(LOCAL_PATH)/../../../.. \
+    $(LOCAL_PATH)/.. \
     $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/include \
     $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips/include/ \
 
@@ -51,3 +51,4 @@ LOCAL_MODULE := $(LOCAL_MODULE)_$(WEBRTC_STL)
 endif
 
 include $(BUILD_STATIC_LIBRARY)
+# include $(BUILD_SHARED_LIBRARY)

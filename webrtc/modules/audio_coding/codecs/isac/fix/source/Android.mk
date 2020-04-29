@@ -45,7 +45,9 @@ LOCAL_SRC_FILES := \
     pitch_lag_tables.c \
     spectrum_ar_model_tables.c \
     transform_tables.c \
-    transform.c
+    transform.c \
+	pitch_filter_c.c \
+	lattice_c.c
 
 # TODO: Use pitch_estimator_mips.c for mips, pitch_estimator_c.c
 
@@ -54,8 +56,8 @@ my_as_src := \
     lattice_armv7.S \
     pitch_filter_armv6.S
 my_c_src := \
-    lattice_c.c \
-    pitch_filter_c.c
+    lattice_c.c
+    #pitch_filter_c.c
 LOCAL_SRC_FILES_arm += $(my_as_src)
 LOCAL_SRC_FILES_x86 += $(my_c_src)
 LOCAL_SRC_FILES_mips += $(my_c_src)

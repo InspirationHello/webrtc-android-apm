@@ -36,10 +36,10 @@ LOCAL_SRC_FILES := \
     critical_section_posix.cc \
     sleep.cc \
     trace_posix.cc \
-    rw_lock_posix.cc \
+    rw_lock_posix.cc
 
-LOCAL_CFLAGS := $(MY_WEBRTC_COMMON_DEFS)
-LOCAL_CPPFLAGS := -std=c++0x
+LOCAL_CFLAGS := $(MY_WEBRTC_COMMON_DEFS) -lstdc++
+LOCAL_CPPFLAGS := -std=c++11 -lstdc++
 
 LOCAL_CFLAGS_arm := $(MY_WEBRTC_COMMON_DEFS_arm)
 LOCAL_CFLAGS_x86 := $(MY_WEBRTC_COMMON_DEFS_x86)
@@ -53,8 +53,8 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../../.. \
     $(LOCAL_PATH)/../interface \
     $(LOCAL_PATH)/spreadsortlib \
-    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.9/include \
-    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.9/libs/mips/include/ \
+    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/include \
+    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips/include/ \
     $(COUSTOM_NDK_PATH)/sources/android/cpufeatures/ 
 
 ifdef WEBRTC_STL

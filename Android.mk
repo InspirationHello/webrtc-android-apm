@@ -9,11 +9,16 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+
+# LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+
 include $(LOCAL_PATH)/android-webrtc.mk
 
 LOCAL_ARM_MODE := arm
 LOCAL_MODULE := libwebrtc_audio_preprocessing
 LOCAL_MODULE_TAGS := optional
+
+LOCAL_LDFLAGS += -llog -fPIC
 
 LOCAL_WHOLE_STATIC_LIBRARIES := \
     libwebrtc_aec \
@@ -47,14 +52,41 @@ LOCAL_SHARED_LIBRARIES := \
     libprotobuf-cpp-lite \
 
 include $(BUILD_SHARED_LIBRARY)
+#include $(BUILD_STATIC_LIBRARY)
 
+#ifeq (true, false)
+include $(CLEAR_VARS)
+
+LOCAL_ARM_MODE := arm
+LOCAL_MODULE := libwebrtc_wrapper
+LOCAL_MODULE_TAGS := optional
+
+#LOCAL_CFLAGS += -fvisiblity=hidden
+LOCAL_LDFLAGS += -fPIC
+
+LOCAL_WHOLE_STATIC_LIBRARIES := \
+	libwebrtc_wrapper_static
+
+LOCAL_SHARED_LIBRARIES := \
+	libwebrtc_audio_preprocessing
+	
+include $(BUILD_SHARED_LIBRARY)
+#endif
 
 include $(CLEAR_VARS)
+
+# LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
+
 include $(LOCAL_PATH)/android-webrtc.mk
 
 LOCAL_ARM_MODE := arm
 LOCAL_MODULE := libwebrtc_audio_coding
 LOCAL_MODULE_TAGS := optional
+
+LOCAL_CFLAGS := -DANDROID_STL=gnustl_static
+LOCAL_CXXFLAGS += -std=c++11
+# LOCAL_LDFLAGS := -DANDROID_STL=gnustl_static -I$(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/include
+LOCAL_LDFLAGS += -llog -std=c++11 -lstdc++ -fPIC
 
 LOCAL_WHOLE_STATIC_LIBRARIES := \
     libwebrtc_base \
@@ -124,6 +156,7 @@ include $(webrtc_path)/webrtc/modules/audio_processing/transient/Android.mk
 include $(webrtc_path)/webrtc/modules/audio_processing/utility/Android.mk
 include $(webrtc_path)/webrtc/modules/audio_processing/vad/Android.mk
 include $(webrtc_path)/webrtc/system_wrappers/source/Android.mk
+include $(webrtc_path)/webrtc_wrapper/Android.mk
 
 # libwebrtc_audio_coding_gnustl_static dependencies
 WEBRTC_STL := gnustl_static

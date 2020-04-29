@@ -60,8 +60,8 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../../common_audio/signal_processing/include \
     $(LOCAL_PATH)/../../common_audio/vad/include \
     $(LOCAL_PATH)/../../system_wrappers/include \
-    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.9/include \
-    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.9/libs/mips/include/ \
+    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/include \
+    $(COUSTOM_NDK_PATH)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips/include/ \
     external/protobuf/src
 
 ifdef WEBRTC_STL

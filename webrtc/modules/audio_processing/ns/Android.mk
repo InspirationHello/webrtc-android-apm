@@ -19,7 +19,9 @@ LOCAL_MODULE := libwebrtc_ns
 LOCAL_MODULE_TAGS := optional
 LOCAL_GENERATED_SOURCES :=
 LOCAL_SRC_FILES := \
-    noise_suppression_x.c \
+    noise_suppression.c \
+	noise_suppression_x.c \
+	ns_core.c \
     nsx_core.c \
     nsx_core_c.c \
 
